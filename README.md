@@ -6,12 +6,12 @@ Run shell commands from a website inside your machine. [[demo]](https://youtu.be
 
 ##### Requirements
 
-- **Required**: Linux, [`zsh`](https://zsh.org), `gnome-terminal`.
+- **Required**: Linux, `gnome-terminal`.
 - **Optional**: [`Go`](https://golang.org), [`git`](https://git-scm.com/downloads).
 
-> :warning: The current version of **Shellrun** can only run on **Linux** with `gnome-terminal` and `zsh`.
+> :warning: The current version of **Shellrun** can only run on **Linux** with `gnome-terminal`.
 >
-> - Support to other shells and terminals are planned.
+> - Support to other terminals are planned.
 
 ##### Downloading the source code
 
