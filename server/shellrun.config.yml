@@ -1,0 +1,2 @@
+# The shell where the commands will be executed. (default: bash)
+shell: bash

@@ -6,12 +6,12 @@ Run shell commands from a website inside your machine. [[demo]](https://youtu.be
 
 ##### Requirements
 
-- **Required**: Linux, [`zsh`](https://zsh.org), `gnome-terminal`.
+- **Required**: Linux, `gnome-terminal`.
 - **Optional**: [`Go`](https://golang.org), [`git`](https://git-scm.com/downloads).
 
-> :warning: The current version of **Shellrun** can only run on **Linux** with `gnome-terminal` and `zsh`.
+> :warning: The current version of **Shellrun** can only run on **Linux** with `gnome-terminal`.
 >
-> - Support to other shells and terminals are planned.
+> - Support to other terminals are planned.
 
 ##### Downloading the source code
 
@@ -39,11 +39,23 @@ Run `go run server/main.go` inside the repository folder.
 
 ###### without `go`
 
-Download the server binary from [Releases](https://github.com/7wf/shellrun/releases) and run it through terminal.
+Download the server binary from [Releases](https://github.com/7wf/shellrun/releases/tag/0.0.2) and run it through terminal.
 
 ```sh
 ./shellrun_server-linux-amd64
 ```
+
+##### Custom configuration
+
+Create a new file named `shellrun.config.yml` inside the same directory where the server is running with the following content.
+
+```yml
+# The shell where the commands will be executed. (default: bash)
+shell: bash
+
+```
+
+Then edit as you like.
 
 ##### Extension
 
