@@ -39,7 +39,7 @@ Run `go run server/main.go` inside the repository folder.
 
 ###### without `go`
 
-Download the server binary from [Releases](https://github.com/7wf/shellrun/releases) and run it through terminal.
+Download the server binary from [Releases](https://github.com/7wf/shellrun/releases/tag/0.0.2) and run it through terminal.
 
 ```sh
 ./shellrun_server-linux-amd64
