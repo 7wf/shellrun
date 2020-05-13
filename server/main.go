@@ -1,12 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"strings"
+	"net/http"
 	"os/exec"
 	"os/user"
-	"net/http"
-	"encoding/json"
+	"strings"
 )
 
 // APIResponse - The API response to request.
