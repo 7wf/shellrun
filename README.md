@@ -45,6 +45,18 @@ Download the server binary from [Releases](https://github.com/7wf/shellrun/relea
 ./shellrun_server-linux-amd64
 ```
 
+##### Custom configuration
+
+Create a new file named `shellrun.config.yml` inside the same directory where the server is running with the following content.
+
+```yml
+# The shell where the commands will be executed. (default: bash)
+shell: bash
+
+```
+
+Then edit as you like.
+
 ##### Extension
 
 ###### Chromium-based
