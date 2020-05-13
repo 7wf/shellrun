@@ -3,11 +3,24 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os/exec"
 	"os/user"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
+
+// Configuration - the configuration file structure.
+type Configuration struct {
+	Shell string
+}
+
+// The global configuration.
+var configuration = Configuration {
+	Shell: "bash", // default is bash
+}
 
 // APIResponse - The API response to request.
 type APIResponse struct {
@@ -44,7 +57,7 @@ func HandleCommandRun(responseWriter http.ResponseWriter, request *http.Request)
 		
 		if commandToRun != "" {
 			fmt.Printf("$ %s\n", commandToRun)
-			errored := RunCommand(commandToRun, "gnome-terminal", "zsh")
+			errored := RunCommand(commandToRun, "gnome-terminal", configuration.Shell)
 		
 			if errored {
 				message = "ERROR"
@@ -65,9 +78,39 @@ func HandleCommandRun(responseWriter http.ResponseWriter, request *http.Request)
 	}
 }
 
-func main() {
-	fmt.Println("The server will be listening on port 2727.")
+// RaiseErrorAndUseDefaultConfiguration - raises an error and returns the configuration file.
+func RaiseErrorAndUseDefaultConfiguration(filePath string, error error) Configuration {
+	fmt.Println("Cannot load configuration file at " + filePath + ".")
+	fmt.Println("    " + error.Error())
+	fmt.Println("")
+	fmt.Println("Using default configuration...")
 
+	return configuration
+}
+
+// LoadConfigurationFile - loads the configuration file.
+func LoadConfigurationFile(filePath string) Configuration {
+	fileContents, readError := ioutil.ReadFile(filePath)
+
+	if readError != nil {
+		return RaiseErrorAndUseDefaultConfiguration(filePath, readError)
+	}
+
+	yamlError := yaml.Unmarshal(fileContents, &configuration)
+
+	if yamlError != nil {
+		return RaiseErrorAndUseDefaultConfiguration(filePath, yamlError)
+	}
+
+	return configuration
+}
+
+func main() {
+	configuration = LoadConfigurationFile("shellrun.config.yml")
+
+	fmt.Println("Shell: " + configuration.Shell)
+
+	fmt.Println("The server will be listening on port 2727.")
 	http.HandleFunc("/run", HandleCommandRun)
 	http.ListenAndServe(":2727", nil)
 }
