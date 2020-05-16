@@ -1,2 +1,5 @@
+# The port that Shellrun server will be listening. (default: 2727)
+port: 2727
+
 # The shell where the commands will be executed. (default: bash)
 shell: bash
