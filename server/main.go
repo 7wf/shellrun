@@ -8,17 +8,20 @@ import (
 	"os/exec"
 	"os/user"
 	"strings"
+	"strconv"
 
 	"gopkg.in/yaml.v2"
 )
 
 // Configuration - the configuration file structure.
 type Configuration struct {
+	Port  int
 	Shell string
 }
 
 // The global configuration.
 var configuration = Configuration {
+	Port: 2727, // default port (2727)
 	Shell: "bash", // default is bash
 }
 
@@ -110,7 +113,7 @@ func main() {
 
 	fmt.Println("Shell: " + configuration.Shell)
 
-	fmt.Println("The server will be listening on port 2727.")
+	fmt.Println("The server will be listening on port " + strconv.Itoa(configuration.Port) + ".")
 	http.HandleFunc("/run", HandleCommandRun)
-	http.ListenAndServe(":2727", nil)
+	http.ListenAndServe(":" + strconv.Itoa(configuration.Port), nil)
 }
